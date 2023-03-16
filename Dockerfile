@@ -3,20 +3,25 @@
 # Supported distros are buster (default) and bullseye (>= PHP 7.4)
 # ======================================================================================================================
 
-MAINTAINER Daan Biesterbos
+ARG PHP_VERSION=8.1
+ARG PHP_DIST=cli
+ARG DEBIAN_DIST=bullseye
 
 FROM php:${PHP_VERSION}-${PHP_DIST}-${DEBIAN_DIST} as php
 
+MAINTAINER Daan Biesterbos
+
 ARG INSTALL_LOCALES='en_US.UTF-8 en_GB.UTF-8 nl_NL.UTF-8 de_DE.UTF-8 fr_FR.UTF-8'
 ARG DEFAULT_LOCALE='en_US.UTF-8'
-ARG GIT_BRANCH
-ARG GIT_COMMIT
+ARG GIT_BRANCH=""
+ARG GIT_REPO=''
+ARG GIT_COMMIT=''
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV XDEBUG_MODE coverage
 ENV INSTALL_LOCALES $INSTALL_LOCALES
 
-LABEL "branch"="$GIT_BRANCH" "commit"="$GIT_COMMIT"
+LABEL "repo"="$GIT_REPO" "branch"="$GIT_BRANCH" "commit"="$GIT_COMMIT"
 
 RUN apt-get update -y && apt-get install -y unzip openssl
 
