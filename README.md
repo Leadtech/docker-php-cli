@@ -9,6 +9,12 @@ xdebug, intl, dom, xsl, gettext, mbstring, gmp, bcmath, zip, bz2, pcntl, sockets
 See available tags on docker hub:
 https://hub.docker.com/r/leadtech/php-cli/tags
 
+## Usage Example
+
+```shell
+docker run --rm  -v $(PWD):/app   -w /app --user=$(id -u):$(id -g)  --env COMPOSER_AUTH=$COMPOSER_AUTH leadtech/php-cli:8.1 vendor/bin/phpunit 
+```
+
 ## Setup
 
 Copy .env.dist to .env and configure environment variables.
